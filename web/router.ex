@@ -16,9 +16,10 @@ defmodule Arteesan.Router do
   scope "/", Arteesan do
     pipe_through :browser # Use the default browser stack
 
-    get "/", PageController, :index
-
     get "/signup", UserController, :new
+    get "/login", UserController, :login
+
+    post "/users", UserController, :create
   end
 
   # Other scopes may use custom stacks.
