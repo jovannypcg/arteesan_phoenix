@@ -19,6 +19,7 @@ defmodule Arteesan.Router do
     get "/", PageController, :index
 
     get "/signup", UserController, :new
+    get "/login", UserController, :login
   end
 
   # Other scopes may use custom stacks.
