@@ -9,10 +9,6 @@ defmodule Arteesan.UserController do
     render conn, "new.html", changeset: changeset
   end
 
-  def login(conn, _params) do
-    render conn, "login.html"
-  end
-
   def create(conn, %{"user" => user}) do
     password = Map.get user, "password"
 
