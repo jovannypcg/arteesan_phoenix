@@ -18,4 +18,11 @@ defmodule Arteesan.User do
     |> validate_format(:email, ~r/(\w+)@([\w.]+)/)
     |> unique_constraint(:email)
   end
+
+  def login_changeset(data, params \\ %{}) do
+    data
+    |> cast(params, [:email, :password])
+    |> validate_required([:email, :password])
+    |> validate_format(:email, ~r/(\w+)@([\w.]+)/)
+  end
 end
