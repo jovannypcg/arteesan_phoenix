@@ -20,6 +20,8 @@ defmodule Arteesan.Router do
 
     get "/signup", UserController, :new
     get "/login", UserController, :login
+
+    post "/users", UserController, :create
   end
 
   # Other scopes may use custom stacks.
