@@ -23,7 +23,10 @@ defmodule Arteesan.UserController do
     changeset = User.changeset(%User{}, %{user | "password" => safe_password})
 
     case Repo.insert(changeset) do
-      { :ok, saved_user } -> IO.inspect(saved_user)
+      { :ok, saved_user } ->
+        conn
+        |> put_flash(:info, "Your account was created")
+        |> redirect(to: "/")
       { :error, err_changeset } ->
         render conn, "new.html", changeset: err_changeset
     end
