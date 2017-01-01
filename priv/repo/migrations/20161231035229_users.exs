@@ -9,7 +9,7 @@ defmodule Arteesan.Repo.Migrations.Users do
       add :role,        :string, default: "CUSTOMER"
       add :active,      :boolean, default: true
 
-      timestamps()
+      timestamps
     end
   end
 end
