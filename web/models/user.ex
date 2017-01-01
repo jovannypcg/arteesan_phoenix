@@ -18,4 +18,24 @@ defmodule Arteesan.User do
     |> validate_format(:email, ~r/(\w+)@([\w.]+)/)
     |> unique_constraint(:email)
   end
+
+  def session_changeset(data, params \\ %{}) do
+    password = Map.get data, "password"
+    password = password || ""
+
+    data
+    |> cast(params, [:email, :password])
+    |> validate_required([:email, :password])
+    |> validate_length(:password, min: 5)
+    |> validate_format(:email, ~r/(\w+)@([\w.]+)/)
+    |> put_change(:password, hashed_password(password))
+  end
+
+  defp hashed_password(password) do
+    safe_password = :crypto.hash(:sha256, password)
+    |> Base.encode16
+    |> String.downcase
+
+    safe_password
+  end
 end

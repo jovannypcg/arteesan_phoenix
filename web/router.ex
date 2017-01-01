@@ -19,7 +19,9 @@ defmodule Arteesan.Router do
     get "/", ProductController, :index
 
     get "/signup", UserController, :new
-    get "/login", UserController, :login
+
+    get "/login", SessionController, :new
+    post "/login", SessionController, :create
 
     post "/users", UserController, :create
   end
