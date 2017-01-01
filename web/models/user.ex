@@ -7,6 +7,8 @@ defmodule Arteesan.User do
     field :password,    :string
     field :role,        :string
     field :active,      :boolean
+
+    timestamps
   end
 
   def changeset(data, params \\ %{}) do

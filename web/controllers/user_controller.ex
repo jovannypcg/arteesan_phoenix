@@ -13,7 +13,22 @@ defmodule Arteesan.UserController do
     render conn, "login.html"
   end
 
-  def create(conn, params) do
+  def create(conn, %{"user" => user}) do
+    password = Map.get user, "password"
 
+    safe_password = :crypto.hash(:sha256, password)
+    |> Base.encode16
+    |> String.downcase
+
+    changeset = User.changeset(%User{}, %{user | "password" => safe_password})
+
+    case Repo.insert(changeset) do
+      { :ok, saved_user } ->
+        conn
+        |> put_flash(:info, "Your account was created")
+        |> redirect(to: "/")
+      { :error, err_changeset } ->
+        render conn, "new.html", changeset: err_changeset
+    end
   end
 end
