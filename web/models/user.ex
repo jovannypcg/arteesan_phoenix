@@ -12,11 +12,15 @@ defmodule Arteesan.User do
   end
 
   def changeset(data, params \\ %{}) do
+    password = Map.get data, "password"
+    password = password || ""
+
     data
     |> cast(params, [:first_name, :email, :password, :role, :active])
     |> validate_required([:first_name, :email, :password])
     |> validate_format(:email, ~r/(\w+)@([\w.]+)/)
     |> unique_constraint(:email)
+    |> put_change(:password, hashed_password(password))
   end
 
   def session_changeset(data, params \\ %{}) do
