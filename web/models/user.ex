@@ -32,7 +32,7 @@ defmodule Arteesan.User do
   end
 
   def session_changeset(data, params \\ %{}) do
-    password = Map.get data, "password"
+    password = Map.get params, "password"
     password = password || ""
 
     data
