@@ -5,6 +5,8 @@ defmodule Arteesan.User do
     field :first_name,  :string
     field :email,       :string
     field :password,    :string
+    field :token,       :string
+    field :provider,    :string
     field :role,        :string
     field :active,      :boolean
 
@@ -21,6 +23,11 @@ defmodule Arteesan.User do
     |> validate_format(:email, ~r/(\w+)@([\w.]+)/)
     |> unique_constraint(:email)
     |> put_change(:password, hashed_password(password))
+  end
+
+  def github_changeset(data, params \\ %{}) do
+    data
+    |> cast(params, [:first_name, :token, :provider, :email, :role, :active])
   end
 
   def session_changeset(data, params \\ %{}) do
