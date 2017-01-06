@@ -13,14 +13,15 @@ defmodule Arteesan.User do
     timestamps
   end
 
-  def changeset(data, params \\ %{}) do
-    password = Map.get data, "password"
+  def signup_changeset(data, params \\ %{}) do
+    password = Map.get params, "password"
     password = password || ""
 
     data
     |> cast(params, [:first_name, :email, :password, :role, :active])
     |> validate_required([:first_name, :email, :password])
     |> validate_format(:email, ~r/(\w+)@([\w.]+)/)
+    |> validate_length(:password, min: 5)
     |> unique_constraint(:email)
     |> put_change(:password, hashed_password(password))
   end
@@ -31,7 +32,7 @@ defmodule Arteesan.User do
   end
 
   def session_changeset(data, params \\ %{}) do
-    password = Map.get data, "password"
+    password = Map.get params, "password"
     password = password || ""
 
     data
@@ -46,7 +47,5 @@ defmodule Arteesan.User do
     safe_password = :crypto.hash(:sha256, password)
     |> Base.encode16
     |> String.downcase
-
-    safe_password
   end
 end
