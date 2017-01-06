@@ -6,6 +6,8 @@ defmodule Arteesan.Repo.Migrations.Users do
       add :first_name,  :string
       add :email,       :string
       add :password,    :string
+      add :token,       :string
+      add :provider,    :string
       add :role,        :string, default: "CUSTOMER"
       add :active,      :boolean, default: true
 
