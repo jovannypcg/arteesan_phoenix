@@ -41,6 +41,10 @@
         </center>
       <% end %>
     </div>
+
+    <center>
+      <h6>Acceder con:</h6>
+      <%= link "Github", to: auth_path(@conn, :request, "github"), class: "waves-effect waves-light btn" %>
+    </center>
   </div>
-  <a href="/signup">Create account</a>
 </center>
