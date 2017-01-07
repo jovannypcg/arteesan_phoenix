@@ -24,6 +24,7 @@ defmodule Arteesan.User do
     |> validate_length(:password, min: 5)
     |> unique_constraint(:email)
     |> put_change(:password, hashed_password(password))
+    |> put_change(:provider, "ARTEESAN")
   end
 
   def github_changeset(data, params \\ %{}) do
@@ -44,7 +45,7 @@ defmodule Arteesan.User do
   end
 
   defp hashed_password(password) do
-    safe_password = :crypto.hash(:sha256, password)
+    :crypto.hash(:sha256, password)
     |> Base.encode16
     |> String.downcase
   end

@@ -7,6 +7,7 @@ defmodule Arteesan.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug Arteesan.Plugs.SetLoggedUser
   end
 
   pipeline :api do
@@ -22,6 +23,7 @@ defmodule Arteesan.Router do
 
     get "/login", SessionController, :new
     post "/login", SessionController, :create
+    delete "/logout", SessionController, :delete
 
     post "/users", UserController, :create
   end

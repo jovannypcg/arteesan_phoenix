@@ -15,7 +15,7 @@ defmodule Arteesan.UserController do
     case Repo.insert(changeset) do
       { :ok, saved_user } ->
         conn
-        |> put_flash(:info, "Your account was created")
+        |> put_flash(:info, "¡Bienvenido #{saved_user.first_name}!")
         |> put_session(:user_id, saved_user.id)
         |> redirect(to: "/")
       { :error, err_changeset } ->
