@@ -25,6 +25,12 @@ defmodule Arteesan.SessionController do
     end
   end
 
+  def delete(conn, _params) do
+    conn
+    |> configure_session(drop: true)
+    |> redirect(to: product_path(conn, :index))
+  end
+
   defp signin(changeset) do
     case Repo.get_by(User, email: changeset.changes.email) do
       nil -> { :error, "Correo o contraseña incorrectos" }

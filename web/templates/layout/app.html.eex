@@ -21,7 +21,15 @@
         <div class="nav-wrapper container">
           <a href="/" class="brand-logo">Arteesan</a>
           <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li><%= link "Ingresar", to: session_path(@conn, :new) %></li>
+            <%= if @conn.assigns[:user] do %>
+              <li>
+                <%= link "Salir", to: session_path(@conn, :delete), method: :delete %>
+              </li>
+            <% else %>
+              <li>
+                <%= link "Ingresar", to: session_path(@conn, :new) %>
+              </li>
+            <% end %>
         </ul>
         </div>
       </nav>
