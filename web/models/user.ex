@@ -10,6 +10,8 @@ defmodule Arteesan.User do
     field :role,        :string
     field :active,      :boolean
 
+    has_many :products, Arteesan.Product
+
     timestamps
   end
 
