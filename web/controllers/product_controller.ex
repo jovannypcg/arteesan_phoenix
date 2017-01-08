@@ -16,6 +16,7 @@ defmodule Arteesan.ProductController do
   end
 
   def create(conn, %{"product" => product}) do
+    product = path_from_file_plug(product)
     changeset = Product.changeset(%Product{}, product)
 
     case Repo.insert(changeset) do
@@ -29,5 +30,13 @@ defmodule Arteesan.ProductController do
     end
 
     render(conn, "new.html", changeset: changeset)
+  end
+
+  defp path_from_file_plug(product) do
+    case product["thumbnail"] do
+      nil -> product
+      thumbnail ->
+        %{ product | "thumbnail" => thumbnail.path }
+    end
   end
 end

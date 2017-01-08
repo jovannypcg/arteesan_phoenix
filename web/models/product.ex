@@ -21,5 +21,21 @@ defmodule Arteesan.Product do
     struct
     |> cast(params, [:title, :price, :description, :thumbnail])
     |> validate_required([:title, :price, :description, :thumbnail])
+    |> upload_thumbnail
+  end
+
+  defp upload_thumbnail(changeset) do
+    case get_change(changeset, :thumbnail) do
+      nil -> changeset
+      thumbnail_local_path ->
+        thumbnail_local_path
+        |> Cloudex.upload
+        |> set_thumbnail_from_cloudex(changeset)
+    end
+  end
+
+  defp set_thumbnail_from_cloudex([ok: %Cloudex.UploadedImage{url: url}], changeset) do
+    changeset
+    |> put_change(:thumbnail, url)
   end
 end
