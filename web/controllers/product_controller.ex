@@ -17,7 +17,11 @@ defmodule Arteesan.ProductController do
 
   def create(conn, %{"product" => product}) do
     product = path_from_file_plug(product)
-    changeset = Product.changeset(%Product{}, product)
+
+    changeset =
+      conn.assigns.user
+      |> build_assoc(:products)
+      |> Product.changeset(product)
 
     case Repo.insert(changeset) do
       { :ok, saved_product } ->
