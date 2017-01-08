@@ -7,7 +7,8 @@ defmodule Arteesan.Product do
     field :description, :string
     field :likes, :integer
     field :views, :integer
-    field :avaliable, :boolean, default: false
+    field :thumbnail, :string
+    field :avaliable, :boolean
     belongs_to :user, Arteesan.User
 
     timestamps
@@ -18,7 +19,7 @@ defmodule Arteesan.Product do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:title, :price, :description, :likes, :views, :avaliable])
-    |> validate_required([:title, :price, :description, :likes, :views, :avaliable])
+    |> cast(params, [:title, :price, :description, :thumbnail])
+    |> validate_required([:title, :price, :description, :thumbnail])
   end
 end

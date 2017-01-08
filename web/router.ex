@@ -39,6 +39,7 @@ defmodule Arteesan.Router do
     pipe_through :browser
 
     get "/new", ProductController, :new
+    post "/", ProductController, :create
   end
 
   # Other scopes may use custom stacks.
