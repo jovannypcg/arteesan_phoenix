@@ -1,10 +1,24 @@
-<h1>List of Products</h1>
-
 <ul class="collection">
   <%= for product <- @products do %>
-    <li class="collection-item">
+    <!-- <li class="collection-item">
       <%= product.title %>
-    </li>
+    </li> -->
+
+    <div class="col s12 m7">
+    <div class="card horizontal">
+      <div class="card-image">
+        <%= img_tag product.thumbnail %>
+      </div>
+      <div class="card-stacked">
+        <div class="card-content">
+          <%= product.description %>
+        </div>
+        <div class="card-action">
+          <a href="#">¡La quiero!</a>
+        </div>
+      </div>
+    </div>
+  </div>
   <% end %>
 </ul>
 
