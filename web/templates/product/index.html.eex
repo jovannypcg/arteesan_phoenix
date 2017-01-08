@@ -10,7 +10,9 @@
 
 
 <div class="fixed-action-btn">
-  <%= link to: product_path(@conn, :new), class: "btn-floating btn-large waves-effect waves-light red" do %>
-    <i class="material-icons">add</i>
+  <%= if @conn.assigns[:user] && @conn.assigns.user.role == "DESIGNER" do %>
+    <%= link to: product_path(@conn, :new), class: "btn-floating btn-large waves-effect waves-light red" do %>
+      <i class="material-icons">add</i>
+    <% end %>
   <% end %>
 </div>
