@@ -35,6 +35,12 @@ defmodule Arteesan.Router do
     get "/:provider/callback", AuthController, :callback
   end
 
+  scope "/products", Arteesan do
+    pipe_through :browser
+
+    get "/new", ProductController, :new
+  end
+
   # Other scopes may use custom stacks.
   # scope "/api", Arteesan do
   #   pipe_through :api
