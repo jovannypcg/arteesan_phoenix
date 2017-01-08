@@ -1,0 +1,16 @@
+<h2>Nuevo producto</h2>
+
+<%= form_for @changeset, product_path(@conn, :create), [multipart: true], fn f -> %>
+  <%= text_input f, :title, placeholder: "Título" %>
+  <%= error_tag f, :title %>
+  <%= text_input f, :description, placeholder: "Descripción" %>
+  <%= error_tag f, :description %>
+  <%= text_input f, :price, placeholder: "Precio" %>
+  <%= error_tag f, :price %>
+
+  <center>
+    <%= file_input f, :thumbnail %>
+    <%= error_tag f, :thumbnail %>
+    <%= submit "Crear" %>
+  </center>
+<% end %>
