@@ -6,8 +6,9 @@ defmodule Arteesan.Repo.Migrations.CreateProduct do
       add :title,       :string
       add :price,       :float
       add :description, :string
-      add :likes,       :integer
-      add :views,       :integer
+      add :thumbnail,   :string
+      add :likes,       :integer, default: 0
+      add :views,       :integer, default: 0
       add :avaliable,   :boolean, default: true
       add :user_id, references(:users, on_delete: :nothing)
 
