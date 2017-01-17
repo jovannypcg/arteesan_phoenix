@@ -1,0 +1,15 @@
+<div class="col s12 m7">
+  <div class="card horizontal">
+    <div class="card-image">
+      <%= img_tag @product.thumbnail %>
+    </div>
+    <div class="card-stacked">
+      <div class="card-content">
+        <%= @product.description %>
+      </div>
+      <div class="card-action">
+        <a href="#">¡La quiero!</a>
+      </div>
+    </div>
+  </div>
+</div>
